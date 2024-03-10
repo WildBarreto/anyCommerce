@@ -18,10 +18,10 @@ export function SearchBar() {
           <input
             type="text"
             placeholder="Busque por nome..."
-            className="w-[60%] ml-auto text-lg h-10 bg-slate-300 font-semibold  px-2 py-1 outline-none tracking-tight rounded-l-md "
+            className="w-[60%] ml-auto text-lg h-10 bg-slate-200 font-semibold  px-2 py-1 outline-none tracking-tight rounded-l-md "
           />
 
-          <button className=" bg-slate-300 mr-auto h-10 rounded-r-md ">
+          <button className=" bg-slate-200 mr-auto h-10 rounded-r-md ">
             <IoMdSearch className="text-purple-400 size-9 mx-0 hover:bg-violet-300 hover:rounded-lg hover:text-slate-600" />
           </button>
         </form>
