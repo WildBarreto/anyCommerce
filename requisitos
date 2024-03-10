@@ -1,0 +1,4 @@
+1 tela de listagem de produtos, nã é obrigatorio, mas se tiver filtros vai ser bem legal
+1 tela de detalhe de produto
+1 tela de login do usuario (pode usar o mesmo codigo que fizemos na aula);
+1 tela de carrinho de compra onde  não poderá finalizar a compra antes de fazer o login
