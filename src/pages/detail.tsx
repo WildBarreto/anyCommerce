@@ -11,7 +11,7 @@ export function Detail() {
         <div className="ml-16  w-full bg-slate-500 rounded-md ">
           <img src={imagem} alt="" className="h-full object-cover rounded-md" />
         </div>
-        <div className="flex flex-col w-full mr-20  rounded-md">
+        <div className="flex flex-col justify-center w-full mr-10  rounded-md">
           <h1 className="text-slate-900 mx-auto mt-2 text-3xl font-semibold">
             Anel muito caro, para super ricos
           </h1>
@@ -35,7 +35,7 @@ export function Detail() {
                 <BsHandbag className="size-5 ml-1" />
               </Link>
             </button>
-            <button className="flex w-56 h-9   justify-between rounded-sm mr-10  bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white ">
+            <button className="flex w-56 h-9   justify-between rounded-sm   bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white ">
               <Link to="/cadastro" className="flex m-auto ">
                 Comprar agora
               </Link>
@@ -44,11 +44,11 @@ export function Detail() {
           <form action="" className=" mt-10 mx-auto flex  items-center bg-slate-100">
             <input
               type="text"
-              placeholder="Calcular frete"
+              placeholder="CEP  0000 - 0000"
               className=" ml-auto text-lg h-10 bg-slate-200 font-semibold  px-2 py-1 outline-none tracking-tight rounded-l-md "
             />
 
-            <button className="  w-20 h-10 rounded-r-md bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white">
+            <button className="  w-20 h-10 rounded-r-md bg-purple-400 text-white font-semibold hover:bg-purple-500 ">
               calcular
             </button>
           </form>

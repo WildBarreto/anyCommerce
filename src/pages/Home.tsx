@@ -5,7 +5,14 @@ function App() {
   return (
     <>
       <SearchBar />
-      <div className="flex">
+      <div className=" flex flex-wrap justify-between w-[80%] mx-auto mt-32 ">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
         <Card />
         <Card />
         <Card />

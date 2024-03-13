@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export function SearchBar() {
   return (
     <>
-      <div className="mx-auto drop-shadow-lg drop-shadow-red-500 flex flex-row h-20 w-full items-center bg-slate-100 fixed z-50 top-0">
+      <div className="mx-auto drop-shadow-lg drop-shadow-purple-500 flex flex-row h-20 w-full items-center bg-slate-100 fixed z-50 top-0">
         <Link to="/">
           <h1 className="text-purple-400 ml-10 text-3xl">Chica Joias</h1>
         </Link>

@@ -2,8 +2,8 @@ import joia from "../assets/sabrianna-Y_bxfTa_iUA-unsplash.jpg";
 
 export function Card() {
   return (
-    <div className="flex flex-row  mt-32">
-      <div className="items-start  h-80 w-64  rounded-md mx-2 mb-6 bg-slate-200 cursor-pointer">
+    <div className="flex flex-row mx-0 ">
+      <div className="  h-80 w-64  rounded-md  mb-6 bg-slate-200 cursor-pointer">
         <div className="h-[60%] bg-white w-full ">
           <img src={joia} alt="" className="h-48 object-cover rounded-t-md" />
         </div>
