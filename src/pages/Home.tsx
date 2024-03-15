@@ -1,7 +1,12 @@
 import { Card } from "../components/card";
 import { SearchBar } from "../components/searchBar";
+import { useAuth } from "../hooks/auth";
 
 function App() {
+  const auth = useAuth();
+
+  console.log(auth)
+
   return (
     <>
       <SearchBar />
