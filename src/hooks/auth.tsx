@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useContext, useMemo, useState } from "react";
 import { User } from "../interfaces/user";
 import { client } from "../network/api";
 
@@ -8,14 +8,24 @@ interface AuthCredentials {
 }
 
 interface AuthContextData {
-  user: User;
+  user?: User | null;
   signIn(credentials: AuthCredentials): void;
+  signOut(): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
-  const [userData, setUserData] = useState<User>({} as User);
+  const [user, setUser] = useState<User | null>(() => {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      return null;
+    }
+
+    const userJson = JSON.parse(user);
+    return userJson;
+  });
 
   async function signIn({ email, password }: AuthCredentials) {
     const { data } = await client.get<User[]>(`users?email=${email}`);
@@ -23,17 +33,28 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     if (data.length === 0 || data[0].password !== password) {
       throw new Error("Usuário e/ou senha inválido(s)");
     }
-    setUserData(data[0]);
+
+    localStorage.setItem("user", JSON.stringify(data[0]));
+
+    setUser(data[0]);
   }
+
+  function signOut() {
+    localStorage.removeItem("user");
+    setUser(null);
+  }
+
+  const providerData = useMemo(
+    () => ({
+      user: user,
+      signIn,
+      signOut,
+    }),
+    [user]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{
-        user: userData,
-        signIn
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={providerData}>{children}</AuthContext.Provider>
   );
 }
 
