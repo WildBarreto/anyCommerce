@@ -1,32 +1,39 @@
-import joia from "../assets/sabrianna-Y_bxfTa_iUA-unsplash.jpg";
+import { Link } from "react-router-dom";
+import { Product } from "../pages/Home";
 
-export function Card() {
+interface CardProps {
+  product: Product; 
+}
+
+export function Card({ product }: CardProps) { 
+  
   return (
-    <div className="flex flex-row mx-0 ">
-      <div className="  h-80 w-64  rounded-md  mb-6 bg-slate-200 cursor-pointer">
-        <div className="h-[60%] bg-white w-full ">
-          <img src={joia} alt="" className="h-48 object-cover rounded-t-md" />
-        </div>
-        <div className="flex flex-col ">
-          <h1 className="text-slate-900 mx-auto mt-2 text-md font-semibold">
-            Anel muito caro, para ricos
-          </h1>
-          <div className="flex flex-wrap justify-center">
-            <span className="text-slate-500 line-through mt-4 mx-2  ml-2 text-xs font-semibold">
-              R$30.000,00
-            </span>
-            <h2 className="text-slate-900 mr-3 mt-2 text-xl font-bold">
-              R$20.000,00
-            </h2>
-            <div className="flex ml-1 h-5 ">
-              <h3 className="font-semibold ">
-                Ou 10x de R$2000,00 sem juros
-              </h3>
+    <Link to={`/produto/${product.id}`} className="m-auto">
+      <div className="flex flex-row mx-0 drop-shadow-lg">
+        <div className="  h-80 w-64  rounded-md  mb-6 bg-slate-100 cursor-pointer">
+          <div className="h-[60%] bg-white w-full ">
+            <img src={product.imagem} alt="" className="h-48 w-full object-cover rounded-t-md" /> {/* Usando a imagem do produto */}
+          </div>
+          <div className="flex flex-col ">
+            <h1 className="text-slate-900 mx-auto mt-2 text-md font-semibold">
+              {product.titulo} {/* Exibindo o título do produto */}
+            </h1>
+            <div className="flex flex-wrap justify-center">
+              <span className="text-slate-500 line-through mt-4 mx-2  ml-2 text-xs font-semibold">
+                R$ {product.valor_antigo.toFixed(2)} {/* Exibindo o valor antigo do produto */}
+              </span>
+              <h2 className="text-slate-900 mr-3 mt-2 text-xl font-bold">
+                R$ {product.valor_novo.toFixed(2)} {/* Exibindo o valor novo do produto */}
+              </h2>
+              <div className="flex ml-1 h-5 ">
+                <h3 className="font-semibold ">
+                  Ou 10x de R$ {(product.valor_novo / 10).toFixed(2)} sem juros {/* Exibindo o valor da parcela */}
+                </h3>
+              </div>
             </div>
-           
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

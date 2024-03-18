@@ -1,31 +1,63 @@
+import { useEffect, useState } from "react";
 import { BsHandbag } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import imagem from "../assets/sabrianna-Y_bxfTa_iUA-unsplash.jpg";
+import { Link, useParams } from "react-router-dom";
 import { SearchBar } from "../components/searchBar";
+import { client } from "../network/api";
+
+interface ProductData {
+  imagem: string;
+  titulo: string;
+  valor_antigo: number;
+  valor_novo: number;
+}
 
 export function Detail() {
+  const [productData, setProductData] = useState<ProductData | null>(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await client.get(`/product/${id}`);
+        setProductData(response.data);
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  // Verifica se productData não é null antes de desestruturá-lo
+  const { imagem, titulo, valor_antigo, valor_novo } = productData || {};
+
+  console.log(productData);
   return (
     <>
       <SearchBar />
       <div className="flex justify-between mt-32 ">
-        <div className="ml-16  w-full bg-slate-500 rounded-md ">
-          <img src={imagem} alt="" className="h-full object-cover rounded-md" />
+        <div className="h-96 ml-16  w-full bg-slate-500 rounded-md ">
+          <img src={imagem} alt="" className="h-full w-full object-cover rounded-md" />
         </div>
         <div className="flex flex-col justify-center w-full mr-10  rounded-md">
           <h1 className="text-slate-900 mx-auto mt-2 text-3xl font-semibold">
-            Anel muito caro, para super ricos
+            {titulo}
           </h1>
           <div className="flex flex-col justify-center">
             <div className="flex mx-auto mt-10">
               <span className="text-slate-500 line-through mt-4 mx-2  ml-2 text-xs font-semibold">
-                R$30.000,00
+                R${valor_antigo}
               </span>
               <h2 className="text-slate-900 mr-3 mt-2 text-xl font-bold">
-                R$20.000,00
+                R${valor_novo}
               </h2>
             </div>
             <div className="  h-5 mx-auto mt-10 ">
-              <h3 className="font-semibold ">Ou 10x de R$2000,00 sem juros</h3>
+              {valor_novo && (
+                <h3 className="font-semibold">
+                  Ou 10x de R${(valor_novo / 10).toFixed(2)} sem juros
+                </h3>
+              )}
             </div>
           </div>
           <div className="flex mx-auto mt-10">
@@ -36,12 +68,15 @@ export function Detail() {
               </Link>
             </button>
             <button className="flex w-56 h-9   justify-between rounded-sm   bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white ">
-              <Link to="/cadastro" className="flex m-auto ">
+              <Link to="/carrinho" className="flex m-auto ">
                 Comprar agora
               </Link>
             </button>
           </div>
-          <form action="" className=" mt-10 mx-auto flex  items-center bg-slate-100">
+          <form
+            action=""
+            className=" mt-10 mx-auto flex  items-center bg-slate-100"
+          >
             <input
               type="text"
               placeholder="CEP  0000 - 0000"
