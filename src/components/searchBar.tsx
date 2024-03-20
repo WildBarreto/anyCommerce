@@ -32,7 +32,7 @@ export function SearchBar() {
         const produtos: Product[] = response.data;
 
         if (termoBusca.trim() === "") {
-          setResultados([]); // Se o termo de busca estiver vazio, limpe os resultados
+          setResultados([]); 
         } else {
           const resultadosFiltrados = produtos.filter((produto) =>
             produto.titulo.toLowerCase().includes(termoBusca.toLowerCase())

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { FormCadastro } from "../components/formCadastro";
 import { Login } from "../components/login";
-//import { Login } from "../components/login";
+
 
 export function Cadastro() {
   const [mostrarLogin, setMostrarLogin] = useState(true);
@@ -48,8 +48,7 @@ export function Cadastro() {
         <div className="w-full h-0.5 bg-purple-400 mb-4" />
         {mostrarLogin && <Login />}
         {mostrarCadastro && <FormCadastro />}
-        {/* <FormCadastro />*/}
-        {/*<Login/>*/}
+       
       </div>
     </>
   );

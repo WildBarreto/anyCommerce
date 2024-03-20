@@ -27,7 +27,7 @@ export function FormCadastro() {
     event.preventDefault();
     try {
       const newUser = { ...formData, id: uuid() };
-      const response = await axios.post("http://localhost:3000/users", newUser); // Usando Axios para fazer a solicitação POST
+      const response = await axios.post("http://localhost:3000/users", newUser); 
 
       if (response.status === 201) {
         console.log("Dados salvos com sucesso!");

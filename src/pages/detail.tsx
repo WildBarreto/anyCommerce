@@ -31,12 +31,10 @@ export function Detail() {
     fetchData();
   }, [id]);
 
-  // Verifica se productData não é null antes de desestruturá-lo
+  
   const { imagem, titulo, valor_antigo, valor_novo } = productData || {};
 
-  {
-    /*console.log(products)*/
-  }
+  
   return (
     <>
       <SearchBar />
