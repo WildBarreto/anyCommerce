@@ -51,7 +51,7 @@ export function SearchBar() {
   };
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center">
       <div className="mx-auto drop-shadow-lg drop-shadow-purple-500 flex flex-row h-20 w-full items-center bg-slate-100 fixed z-50 top-0">
         <Link to="/">
           <h1 className="text-purple-400 ml-10 text-3xl w-full">Chica Joias</h1>
@@ -93,16 +93,14 @@ export function SearchBar() {
         </button>
       </div>
 
-      <div className="w-full h-screen  z-40 mt-20 absolute ">
-        <div className="bg-slate-50 w-[48rem]  mx-auto   grid grid-cols-3 gap-4 ">
-          {resultados.map((resultado) => (
-            <Link to={`/produto/${resultado.id}`} key={resultado.id}>
-              <div className="m-3">
-                <Card product={resultado} />
-              </div>
-            </Link>
-          ))}
-        </div>
+      <div className="bg-slate-50 w-[48rem] mx-auto mt-20   absolute  zinde z-40 grid grid-cols-3 gap-4">
+        {resultados.map((resultado) => (
+          <Link to={`/produto/${resultado.id}`} key={resultado.id}>
+            <div className="m-3">
+              <Card product={resultado} />
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
