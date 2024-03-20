@@ -1,9 +1,9 @@
 import {
-    createContext,
-    useCallback,
-    useContext,
-    useMemo,
-    useState,
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
 } from "react";
 
 interface Product {
@@ -15,6 +15,7 @@ interface Product {
 
 interface ProductContextData {
   products: Product[];
+  cartCount: number;
 
   addToCart(product: Product): void; // Função para adicionar produtos ao carrinho
 }
@@ -23,42 +24,41 @@ const ProductContext = createContext<ProductContextData>(
   {} as ProductContextData
 );
 
-// definir o provider
+// Definir o provider
 export default function ProductProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [cartCount, setCartCount] = useState(0);
 
   const addToCart = useCallback(
     (product: Product) => {
       setProducts([...products, product]);
+      setCartCount((prevCount) => prevCount + 1); // Incrementar o contador de produtos
     },
     [products]
   );
 
-  // memoize
+  // Memoize
   const providerData = useMemo(
     () => ({
       products,
-
+      cartCount,
       addToCart,
     }),
-    [products, addToCart]
+    [products, cartCount, addToCart]
   );
-  {
-    console.log(products);
-  }
+
   return (
     <ProductContext.Provider value={providerData}>
-        
       {children}
     </ProductContext.Provider>
   );
 }
 
-// criar o nosso hook
+// Criar o nosso hook
 export function useProducts(): ProductContextData {
   const context = useContext(ProductContext);
 

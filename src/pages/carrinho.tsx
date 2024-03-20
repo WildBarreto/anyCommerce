@@ -62,11 +62,11 @@ export function Carrinho() {
               <h2>Frete:</h2>
               <h2> R$200,00</h2>
             </div>
-            <div className="flex  justify-between">
-              <h2>Total: </h2>
-              <h2>R${(total + 200).toFixed(2)}</h2>
+            <div className="flex  justify-between mt-6">
+              <h2 className="font-bold">Total: </h2>
+              <h2 className="font-bold">R${(total + 200).toFixed(2)}</h2>
             </div>
-            <button className="flex w-full h-9 mt-10 mx-auto justify-between rounded-md   bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white ">
+            <button className="flex w-full h-9 mt-4 mx-auto justify-between rounded-md   bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white ">
               <div className="flex m-auto ">Fechar pedido</div>
             </button>
           </div>

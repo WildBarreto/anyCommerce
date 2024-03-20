@@ -34,7 +34,9 @@ export function Detail() {
   // Verifica se productData não é null antes de desestruturá-lo
   const { imagem, titulo, valor_antigo, valor_novo } = productData || {};
 
-{/*console.log(products)*/}
+  {
+    /*console.log(products)*/
+  }
   return (
     <>
       <SearchBar />
@@ -43,7 +45,7 @@ export function Detail() {
           <img
             src={imagem}
             alt=""
-            className="h-full w-full object-cover rounded-md"
+            className="h-full w-full object-fill rounded-md"
           />
         </div>
         <div className="flex flex-col justify-center w-full mr-10  rounded-md">
@@ -69,22 +71,22 @@ export function Detail() {
           </div>
           <div className="flex mx-auto mt-10">
             <button
-              onClick={() =>
-                addToCart(productData!)
-              }
+              onClick={() => addToCart(productData!)}
               className="flex w-56 h-9   justify-between rounded-md mr-4 border-2 border-purple-500 text-purple-500 hover:text-purple-100 bg-purple-200 font-semibold hover:bg-purple-300 "
             >
-             
               <div className="flex m-auto ">
                 Adicionar ao carrinho
                 <BsHandbag className="size-5 ml-1" />
               </div>
             </button>
-            <button className="flex w-56 h-9   justify-between rounded-md   bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white ">
-              <Link to="/carrinho" className="flex m-auto ">
+            <Link
+              to="/carrinho"
+              className="flex w-56 h-9   justify-between rounded-md   bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white"
+            >
+              <button onClick={() => addToCart(productData!)} className=" flex m-auto">
                 Comprar agora
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
           <form
             action=""

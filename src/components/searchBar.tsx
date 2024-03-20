@@ -4,6 +4,7 @@ import { CiLogin } from "react-icons/ci";
 import { IoMdSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/auth";
+import { useProducts } from "../hooks/products";
 import { client } from "../network/api";
 import { Card } from "./card";
 //import { Card } from "./card";
@@ -22,6 +23,8 @@ export function SearchBar() {
 
   const [termoBusca, setTermoBusca] = useState("");
   const [resultados, setResultados] = useState<Product[]>([]);
+
+  const { cartCount } = useProducts();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,11 +89,16 @@ export function SearchBar() {
             <CiLogin className="m-auto size-10" />
           </button>
         )}
-        <button className="flex justify-center rounded-md mr-10 w-16 h-9 text-purple-500 font-semibold hover:text-purple-700">
-          <Link to="/carrinho" className="m-auto">
-            <BsHandbag className="size-6" />
-          </Link>
-        </button>
+        <div className="flex">
+          <div className="flex justify-center right-11 bg-red-500 rounded-full size-4 absolute">
+            <span className="text-xs  text-slate-50">{cartCount}</span>
+          </div>
+          <button className="flex justify-center rounded-md mr-10 w-16 h-9 text-purple-500 font-semibold hover:text-purple-700">
+            <Link to="/carrinho" className="m-auto">
+              <BsHandbag className="size-6" />
+            </Link>
+          </button>
+        </div>
       </div>
 
       <div className="bg-slate-50 w-[48rem] mx-auto mt-20   absolute  zinde z-40 grid grid-cols-3 gap-4">
