@@ -7,7 +7,6 @@ import { useAuth } from "../hooks/auth";
 import { useProducts } from "../hooks/products";
 import { client } from "../network/api";
 import { Card } from "./card";
-//import { Card } from "./card";
 
 export interface Product {
   id: number;
@@ -53,6 +52,10 @@ export function SearchBar() {
     setTermoBusca(event.target.value);
   };
 
+  const handleCardClick = () => {
+    setTermoBusca(""); 
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="mx-auto drop-shadow-lg drop-shadow-purple-500 flex flex-row h-20 w-full items-center bg-slate-100 fixed z-50 top-0">
@@ -94,7 +97,7 @@ export function SearchBar() {
             <span className="text-xs  text-slate-50">{cartCount}</span>
           </div>
           <button className="flex justify-center rounded-md mr-10 w-16 h-9 text-purple-500 font-semibold hover:text-purple-700">
-            <Link to="/carrinho" className="m-auto">
+            <Link to="/carrinho" className="mt-1">
               <BsHandbag className="size-6" />
             </Link>
           </button>
@@ -103,7 +106,7 @@ export function SearchBar() {
 
       <div className="bg-slate-50 w-[48rem] mx-auto mt-20   absolute  zinde z-40 grid grid-cols-3 gap-4">
         {resultados.map((resultado) => (
-          <Link to={`/produto/${resultado.id}`} key={resultado.id}>
+          <Link to={`/produto/${resultado.id}`} key={resultado.id} onClick={handleCardClick}>
             <div className="m-3">
               <Card product={resultado} />
             </div>

@@ -2,7 +2,7 @@ import { SearchBar } from "../components/searchBar";
 import { useProducts } from "../hooks/products";
 
 export function Carrinho() {
-  const { products } = useProducts();
+  const { products, removeFromCart } = useProducts();
 
   let total = 0;
 
@@ -15,6 +15,10 @@ export function Carrinho() {
 
   {
     calcularTotal().toFixed(2);
+  }
+
+  function formatValue(valor: number ) {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
   }
 
   return (
@@ -39,11 +43,19 @@ export function Carrinho() {
                       className="size-24 rounded-lg"
                     />
                     <div className="w-full flex justify-between ml-4">
-                      <h2 className="text-xl font-semibold">
-                        {product.titulo}
-                      </h2>
+                      <div>
+                        <h2 className="text-xl font-semibold">
+                          {product.titulo}
+                        </h2>
+                        <div className="flex justify-between w-28 mt-10 text-purple-400">
+                          <button onClick={() => removeFromCart(index)}>
+                            Excluir
+                          </button>
+                          <button>Salvar</button>
+                        </div>
+                      </div>
                       <h2 className="font-semibold text-xl">
-                        R${product.valor_novo.toFixed(2)}
+                        {formatValue(product.valor_novo)}
                       </h2>
                     </div>
                   </li>
@@ -56,7 +68,7 @@ export function Carrinho() {
             <h2 className="font-semibold">Resumo da compra</h2>
             <div className="flex  justify-between">
               <h2>Produto: </h2>
-              <h2>R${total.toFixed(2)}</h2>
+              <h2>R${formatValue(total)}</h2>
             </div>
             <div className="flex  justify-between">
               <h2>Frete:</h2>
@@ -64,7 +76,7 @@ export function Carrinho() {
             </div>
             <div className="flex  justify-between mt-6">
               <h2 className="font-bold">Total: </h2>
-              <h2 className="font-bold">R${(total + 200).toFixed(2)}</h2>
+              <h2 className="font-bold">R${formatValue(total + 200)}</h2>
             </div>
             <button className="flex w-full h-9 mt-4 mx-auto justify-between rounded-md   bg-purple-400 text-white font-semibold hover:bg-purple-500 hover:text-white ">
               <div className="flex m-auto ">Fechar pedido</div>

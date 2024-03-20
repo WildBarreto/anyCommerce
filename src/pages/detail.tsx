@@ -14,7 +14,7 @@ interface ProductData {
 
 export function Detail() {
   const [productData, setProductData] = useState<ProductData | null>(null);
-  const { addToCart } = useProducts();
+  const { addToCart, formatValue } = useProducts();
 
   const { id } = useParams();
 
@@ -55,16 +55,16 @@ export function Detail() {
           <div className="flex flex-col justify-center">
             <div className="flex mx-auto mt-10">
               <span className="text-slate-500 line-through mt-4 mx-2  ml-2 text-xs font-semibold">
-                R${valor_antigo}
+                R${formatValue(valor_antigo ?? 0)}
               </span>
               <h2 className="text-slate-900 mr-3 mt-2 text-xl font-bold">
-                R${valor_novo}
+                R${formatValue(valor_novo ?? 0)}
               </h2>
             </div>
             <div className="  h-5 mx-auto mt-10 ">
               {valor_novo && (
                 <h3 className="font-semibold">
-                  Ou 10x de R${(valor_novo / 10).toFixed(2)} sem juros
+                  Ou 10x de R${formatValue(valor_novo / 10)} sem juros
                 </h3>
               )}
             </div>

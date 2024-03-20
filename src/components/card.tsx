@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useProducts } from "../hooks/products";
 import { Product } from "../pages/Home";
 
 interface CardProps {
@@ -6,7 +7,8 @@ interface CardProps {
 }
 
 export function Card({ product }: CardProps) { 
-  
+  const { formatValue } = useProducts();
+
   return (
     <Link to={`/produto/${product.id}`} className="m-auto">
       <div className="flex flex-row mx-0 drop-shadow-lg">
@@ -20,14 +22,14 @@ export function Card({ product }: CardProps) {
             </h1>
             <div className="flex flex-wrap justify-center">
               <span className="text-slate-500 line-through mt-4 mx-2  ml-2 text-xs font-semibold">
-                R$ {product.valor_antigo.toFixed(2)} {/* Exibindo o valor antigo do produto */}
+                R$ {formatValue(product.valor_antigo)} {/* Exibindo o valor antigo do produto */}
               </span>
               <h2 className="text-slate-900 mr-3 mt-2 text-xl font-bold">
-                R$ {product.valor_novo.toFixed(2)} {/* Exibindo o valor novo do produto */}
+                R$ {formatValue(product.valor_novo)} {/* Exibindo o valor novo do produto */}
               </h2>
               <div className="flex ml-1 h-5 ">
                 <h3 className="font-semibold ">
-                  Ou 10x de R$ {(product.valor_novo / 10).toFixed(2)} sem juros {/* Exibindo o valor da parcela */}
+                  Ou 10x de R$ {formatValue(product.valor_novo / 10)} sem juros {/* Exibindo o valor da parcela */}
                 </h3>
               </div>
             </div>

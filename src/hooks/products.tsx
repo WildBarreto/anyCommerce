@@ -16,15 +16,15 @@ interface Product {
 interface ProductContextData {
   products: Product[];
   cartCount: number;
-
-  addToCart(product: Product): void; // Função para adicionar produtos ao carrinho
+  addToCart(product: Product): void;
+  removeFromCart(productIndex: number): void;
+  formatValue(value: number): string; // Ajuste do tipo de retorno para 'string'
 }
 
 const ProductContext = createContext<ProductContextData>(
   {} as ProductContextData
 );
 
-// Definir o provider
 export default function ProductProvider({
   children,
 }: {
@@ -36,19 +36,35 @@ export default function ProductProvider({
   const addToCart = useCallback(
     (product: Product) => {
       setProducts([...products, product]);
-      setCartCount((prevCount) => prevCount + 1); // Incrementar o contador de produtos
+      setCartCount((prevCount) => prevCount + 1);
     },
     [products]
   );
 
-  // Memoize
+  const removeFromCart = useCallback(
+    (productIndex: number) => {
+      const updatedProducts = [...products];
+      updatedProducts.splice(productIndex, 1);
+      setProducts(updatedProducts);
+      setCartCount((prevCount) => prevCount - 1);
+    },
+    [products]
+  );
+
+  // Função para formatar o valor monetário
+  function formatValue(value: number): string {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+  }
+
   const providerData = useMemo(
     () => ({
       products,
       cartCount,
       addToCart,
+      removeFromCart,
+      formatValue,
     }),
-    [products, cartCount, addToCart]
+    [products, cartCount, addToCart, removeFromCart]
   );
 
   return (
@@ -58,12 +74,11 @@ export default function ProductProvider({
   );
 }
 
-// Criar o nosso hook
 export function useProducts(): ProductContextData {
   const context = useContext(ProductContext);
 
   if (!context)
-    throw new Error("useProducts must be used within an ProductProvider");
+    throw new Error("useProducts must be used within a ProductProvider");
 
   return context;
 }
